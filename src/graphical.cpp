@@ -5,6 +5,7 @@
 //
 
 #include <cmath>
+#include <utility>
 #include "graphical.h"
 
 using namespace std;
@@ -15,7 +16,7 @@ using namespace std;
 
 struct Incircle {
 public:
-    Offset center;
+    const Offset center;
 
     /// 根据一个角度和角内切圆的半径构建一个[Incircle]，[radians]为角对应的弧度，[radius]内切圆半径
     static Incircle fromRadians(double radians, double radius) {
@@ -80,27 +81,27 @@ public:
     ///
     /// To translate a rectangle by separate x and y components rather than by an
     /// [Offset], consider [translate].
-    Incircle shift(Offset offset) {
+    Incircle shift(Offset offset) const {
         return {begin + offset, middle + offset, end + offset};
     }
 
     /// 绕着Z轴顺时针旋转[radians]
-    Incircle rotationX(double radians) {
+    Incircle rotationX(double radians) const {
         return {begin.rotationX(radians), middle.rotationX(radians), end.rotationX(radians)};
     }
 
     /// 绕着Z轴顺时针旋转[radians]
-    Incircle rotationY(double radians) {
+    Incircle rotationY(double radians) const {
         return {begin.rotationY(radians), middle.rotationY(radians), end.rotationY(radians)};
     }
 
     /// 绕着Z轴顺时针旋转[radians]
-    Incircle rotationZ(double radians) {
+    Incircle rotationZ(double radians) const {
         return {begin.rotationZ(radians), middle.rotationZ(radians), end.rotationZ(radians)};
     }
 
     /// 绕着角平分线旋转180度
-    Incircle flipped() {
+    Incircle flipped() const {
         return {end, middle, begin};
     }
 
@@ -164,9 +165,9 @@ public:
 
 
 private:
-    Offset begin;
-    Offset middle;
-    Offset end;
+    const Offset begin;
+    const Offset middle;
+    const Offset end;
 
     Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end),
                                                         center(centerOf(begin, middle, end)) {}
@@ -174,11 +175,12 @@ private:
 
 struct Path {
 public:
-    Incircle top;
-    Incircle left;
-    Incircle right;
+    const Incircle top;
+    const Incircle left;
+    const Incircle right;
 
-    Path(const Incircle &top, const Incircle &left, const Incircle &right) : top(top), left(left), right(right) {}
+    Path(Incircle top, Incircle left, Incircle right) : top(std::move(top)), left(std::move(left)),
+                                                        right(std::move(right)) {}
 
     string toJson() const {
         return string()

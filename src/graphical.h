@@ -94,10 +94,7 @@ public:
     double width;
     double height;
 
-    Size(double width, double height) {
-        this->width = width;
-        this->height = height;
-    }
+    Size(double width, double height) : width(width), height(height) {}
 
     Size flipped() const {
         return {height, width};
@@ -141,10 +138,10 @@ public:
 
 struct Rect {
 public:
-    double left;
-    double top;
-    double right;
-    double bottom;
+    const double left;
+    const double top;
+    const double right;
+    const double bottom;
 
     Rect(double left, double top, double right, double bottom) : left(left), top(top), right(right), bottom(bottom) {}
 
