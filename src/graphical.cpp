@@ -2,11 +2,12 @@
 // Created by changlei on 2021/12/23.
 //
 
-#include <cmath>
-#include <utility>
 #include "graphical.h"
 
 using namespace std;
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
 struct Offset {
 public:
@@ -210,8 +211,8 @@ public:
 
     /// 纠正[radians]，让它在[0, 360)之间
     static double correctRadians(double radians) {
-        double newRadians = fmod(radians, radians360);
-        return newRadians < 0 ? radians360 + newRadians : newRadians;
+        double newRadians = fmod(radians, r360);
+        return newRadians < 0 ? r360 + newRadians : newRadians;
     }
 
     /// 修正因内切圆造成的位移
@@ -219,7 +220,7 @@ public:
         const Size newSize(size.width / 2, size.height - radius);
         double bof = newSize.radians;
         double boe = acos(radius / newSize.distance);
-        return newSize.width / tan(bof + boe - radians90);
+        return newSize.width / tan(bof + boe - r90);
     }
 
     /// 根据圆上三个点计算圆心
@@ -306,20 +307,20 @@ public:
 const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset) {
     const Size size = Size(width, height);
     const double topRadius = radius;
-    const double leftRadius = blRadius == NAN ? radius : blRadius;
-    const double rightRadius = brRadius == NAN ? radius : brRadius;
+    const double leftRadius = blRadius;
+    const double rightRadius = brRadius;
 
     const double topRadians = size.semiRadians;
     const Offset topOffset = Offset(width / 2, 0);
     const Incircle top = Incircle::fromSize(size, topRadius, avoidOffset).shift(topOffset);
 
-    const double leftRadians = (radians90 + topRadians) / 2;
-    const double leftRotation = radians90 + leftRadians;
+    const double leftRadians = (r90 + topRadians) / 2;
+    const double leftRotation = r90 + leftRadians;
     const Offset leftOffset = Offset(0, height);
     const Incircle left = Incircle::fromRadians(leftRadians, leftRadius).rotationZ(leftRotation).shift(leftOffset);
 
-    const double rightRadians = (radians90 + topRadians) / 2;
-    const double rightRotation = radians270 - leftRadians;
+    const double rightRadians = (r90 + topRadians) / 2;
+    const double rightRotation = r270 - leftRadians;
     const Offset rightOffset = Offset(width, height);
     const Incircle right = Incircle::fromRadians(rightRadians, rightRadius).rotationZ(rightRotation).shift(rightOffset);
     const Path path = {top, left, right};
@@ -327,3 +328,25 @@ const char *cornerPath(double width, double height, double radius, double blRadi
     char *str = new char[strlen(json.c_str()) + 1];
     return strcpy(str, json.c_str());
 }
+
+double pi() {
+    return M_PI;
+}
+
+double radians90() {
+    return r90;
+}
+
+double radians180() {
+    return r180;
+}
+
+double radians270() {
+    return r270;
+}
+
+double radians360() {
+    return r360;
+}
+
+#pragma clang diagnostic pop
