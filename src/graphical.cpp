@@ -56,6 +56,17 @@ public:
                 .append(",\"dy\":")
                 .append(to_string(dy));
     }
+
+    bool operator==(const Offset &rhs) const {
+        return dx == rhs.dx &&
+               dy == rhs.dy &&
+               distance == rhs.distance &&
+               direction == rhs.direction;
+    }
+
+    bool operator!=(const Offset &rhs) const {
+        return !(rhs == *this);
+    }
 };
 
 struct Size {
@@ -86,6 +97,19 @@ public:
                 .append(to_string(radians))
                 .append(",\"distance\":")
                 .append(to_string(distance));
+    }
+
+    bool operator==(const Size &rhs) const {
+        return width == rhs.width &&
+               height == rhs.height &&
+               direction == rhs.direction &&
+               radians == rhs.radians &&
+               distance == rhs.distance &&
+               semiRadians == rhs.semiRadians;
+    }
+
+    bool operator!=(const Size &rhs) const {
+        return !(rhs == *this);
     }
 };
 
@@ -126,14 +150,26 @@ public:
                 .append(",\"size\":")
                 .append("{" + size.toJson() + "}");
     }
+
+    bool operator==(const Rect &rhs) const {
+        return left == rhs.left &&
+               top == rhs.top &&
+               right == rhs.right &&
+               bottom == rhs.bottom &&
+               size == rhs.size;
+    }
+
+    bool operator!=(const Rect &rhs) const {
+        return !(rhs == *this);
+    }
 };
 
 struct Incircle {
 public:
-    const Offset begin;
-    const Offset middle;
-    const Offset end;
-    const Offset center;
+    const struct Offset begin;
+    const struct Offset middle;
+    const struct Offset end;
+    const struct Offset center;
 
     /// 根据一个角度和角内切圆的半径构建一个[Incircle]，[radians]为角对应的弧度，[radius]内切圆半径
     static Incircle fromRadians(double radians, double radius) {
@@ -280,13 +316,31 @@ private:
         initializer_list<double> dys{begin.dy, middle.dy, end.dy};
         return make_pair(min(dys), max(dys));
     }
+
+public:
+    bool operator==(const Incircle &rhs) const {
+        return begin == rhs.begin &&
+               middle == rhs.middle &&
+               end == rhs.end &&
+               center == rhs.center &&
+               radius == rhs.radius &&
+               circle == rhs.circle &&
+               radians == rhs.radians &&
+               rotation == rhs.rotation &&
+               vertex == rhs.vertex &&
+               bounds == rhs.bounds;
+    }
+
+    bool operator!=(const Incircle &rhs) const {
+        return !(rhs == *this);
+    }
 };
 
 struct Path {
 public:
-    const Incircle top;
-    const Incircle left;
-    const Incircle right;
+    const struct Incircle top;
+    const struct Incircle left;
+    const struct Incircle right;
 
     Path(Incircle top, Incircle left, Incircle right) : top(std::move(top)), left(std::move(left)), right(std::move(right)) {}
 
@@ -301,7 +355,25 @@ public:
                 .append("{" + right.toJson() + "}")
                 .append("}");
     }
+
+    bool operator==(const Path &rhs) const {
+        return top == rhs.top &&
+               left == rhs.left &&
+               right == rhs.right;
+    }
+
+    bool operator!=(const Path &rhs) const {
+        return !(rhs == *this);
+    }
 };
+
+Incircle fromRadians(double radians, double radius) {
+    return Incircle::fromRadians(radians, radius);
+}
+
+Incircle fromSize(double width, double height, double radius, bool avoidOffset) {
+    return Incircle::fromSize({width, height}, radius, avoidOffset);
+}
 
 /// 创建各个角
 const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset) {
