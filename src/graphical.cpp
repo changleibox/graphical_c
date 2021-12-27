@@ -1,5 +1,3 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "ArgumentSelectionDefects"
 //
 // Created by changlei on 2021/12/23.
 //
@@ -10,23 +8,20 @@
 
 using namespace std;
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-#pragma clang diagnostic ignored "-Wreturn-stack-address"
-
 struct Offset {
 public:
-    double dx;
-    double dy;
+    const double dx;
+    const double dy;
 
-    static Offset zero() {
-        return {0, 0};
-    }
+    Offset(double dx, double dy) : dx(dx), dy(dy) {}
 
-    Offset(double dx, double dy) {
-        this->dx = dx;
-        this->dy = dy;
-    }
+    /// The magnitude of the offset.
+    ///
+    /// If you need this value to compare it to another [Offset]'s distance,
+    /// consider using [distanceSquared] instead, since it is cheaper to compute.
+    const double distance{sqrt(dx * dx + dy * dy)};
+
+    const double direction{atan2(dy, dx)};
 
     /// 绕X轴旋转
     Offset rotationX(double radians) const {
@@ -43,18 +38,6 @@ public:
         double newCos = cos(radians);
         double newSin = sin(radians);
         return {dx * newCos - dy * newSin, dy * newCos + dx * newSin};
-    }
-
-    /// The magnitude of the offset.
-    ///
-    /// If you need this value to compare it to another [Offset]'s distance,
-    /// consider using [distanceSquared] instead, since it is cheaper to compute.
-    double distance() const {
-        return sqrt(dx * dx + dy * dy);
-    }
-
-    double direction() const {
-        return atan2(dy, dx);
     }
 
     Offset operator+(const Offset &other) const {
@@ -76,35 +59,19 @@ public:
 
 struct Size {
 public:
-    double width;
-    double height;
+    const double width;
+    const double height;
 
     Size(double width, double height) : width(width), height(height) {}
 
-    Size flipped() const {
-        return {height, width};
-    }
+    const double direction{atan2(height, width)};
 
-    double direction() const {
-        return atan2(height, width);
-    }
+    const double radians{atan2(width, height)};
 
-    double radians() const {
-        return flipped().direction();
-    }
-
-    double distance() const {
-        return direction();
-    }
-
-    Offset centerRight(Offset origin) const {
-        return {origin.dx + width, origin.dy + height / 2.0};
-    }
+    const double distance{direction};
 
     /// 半角
-    double semiRadians() const {
-        return flipped().centerRight(Offset::zero()).direction();
-    }
+    const double semiRadians{atan2(height, width / 2)};
 
     string toJson() const {
         return string()
@@ -113,11 +80,11 @@ public:
                 .append(",\"height\":")
                 .append(to_string(height))
                 .append(",\"direction\":")
-                .append(to_string(direction()))
+                .append(to_string(direction))
                 .append(",\"radians\":")
-                .append(to_string(radians()))
+                .append(to_string(radians))
                 .append(",\"distance\":")
-                .append(to_string(distance()));
+                .append(to_string(distance));
     }
 };
 
@@ -180,47 +147,34 @@ public:
         if (avoidOffset) {
             offsetHeight = Incircle::offsetOf(size, radius);
         }
-        Offset offset = Offset::zero();
         if (isinf(offsetHeight)) {
-            size = Size(width, offsetHeight);
-            offset = Offset(0, height - offsetHeight);
+            const Size newSize(width, offsetHeight);
+            const Offset offset(0, height - offsetHeight);
+            double radians = newSize.semiRadians;
+            return Incircle::fromRadians(radians, radius).shift(offset);
+        } else {
+            double radians = size.semiRadians;
+            return Incircle::fromRadians(radians, radius);
         }
-        double radians = size.semiRadians();
-        return Incircle::fromRadians(radians, radius).shift(offset);
     }
 
     /// 内切圆半径
-    double radius() const {
-        return abs((center - middle).distance());
-    }
+    const double radius{abs((center - middle).distance)};
 
     /// 内切圆
-    Rect circle() const {
-        return Rect::fromCircle(center, radius());
-    }
+    const Rect circle{Rect::fromCircle(center, radius)};
 
     /// 角的弧度
-    double radians() const {
-        return correctRadians(acos((begin - end).distance() / (2 * radius())));
-    }
+    const double radians{correctRadians(acos((begin - end).distance / (2 * radius)))};
 
     /// 旋转的弧度
-    double rotation() const {
-        return correctRadians((end - begin).direction());
-    }
+    const double rotation{correctRadians((end - begin).direction)};
 
     /// 角的顶点
-    Offset vertex() const {
-        double dy = radius() / sin(radians()) - radius();
-        return {middle.dx + dy * sin(rotation()), middle.dy - dy * cos(rotation())};
-    }
+    const Offset vertex{Offset(middle.dx + (radius / sin(radians) - radius) * sin(rotation), middle.dy - (radius / sin(radians) - radius) * cos(rotation))};
 
     /// 边界
-    Rect bounds() const {
-        initializer_list<double> dxs{begin.dx, middle.dx, end.dx};
-        initializer_list<double> dys{begin.dy, middle.dy, end.dy};
-        return {min(dxs), min(dys), max(dxs), max(dys)};
-    }
+    const Rect bounds{Rect(min(dxs()), min(dys()), max(dxs()), max(dys()))};
 
     /// Returns a new [Incircle] translated by the given offset.
     ///
@@ -230,19 +184,19 @@ public:
         return {begin + offset, middle + offset, end + offset};
     }
 
-    /// 绕着Z轴顺时针旋转[radians]
-    Incircle rotationX(double radians) const {
-        return {begin.rotationX(radians), middle.rotationX(radians), end.rotationX(radians)};
+    /// 绕着Z轴顺时针旋转[newRadians]
+    Incircle rotationX(double newRadians) const {
+        return {begin.rotationX(newRadians), middle.rotationX(newRadians), end.rotationX(newRadians)};
     }
 
-    /// 绕着Z轴顺时针旋转[radians]
-    Incircle rotationY(double radians) const {
-        return {begin.rotationY(radians), middle.rotationY(radians), end.rotationY(radians)};
+    /// 绕着Z轴顺时针旋转[newRadians]
+    Incircle rotationY(double newRadians) const {
+        return {begin.rotationY(newRadians), middle.rotationY(newRadians), end.rotationY(newRadians)};
     }
 
-    /// 绕着Z轴顺时针旋转[radians]
-    Incircle rotationZ(double radians) const {
-        return {begin.rotationZ(radians), middle.rotationZ(radians), end.rotationZ(radians)};
+    /// 绕着Z轴顺时针旋转[newRadians]
+    Incircle rotationZ(double newRadians) const {
+        return {begin.rotationZ(newRadians), middle.rotationZ(newRadians), end.rotationZ(newRadians)};
     }
 
     /// 绕着角平分线旋转180度
@@ -258,10 +212,10 @@ public:
 
     /// 修正因内切圆造成的位移
     static double offsetOf(Size size, double radius) {
-        size = Size(size.width / 2, size.height - radius);
-        double bof = size.radians();
-        double boe = acos(radius / size.distance());
-        return size.width / tan(bof + boe - radians90);
+        const Size newSize(size.width / 2, size.height - radius);
+        double bof = newSize.radians;
+        double boe = acos(radius / newSize.distance);
+        return newSize.width / tan(bof + boe - radians90);
     }
 
     /// 根据圆上三个点计算圆心
@@ -295,23 +249,30 @@ public:
                 .append(",\"center\":")
                 .append("{" + center.toJson() + "}")
                 .append(",\"circle\":")
-                .append("{" + circle().toJson() + "}")
+                .append("{" + circle.toJson() + "}")
                 .append(",\"vertex\":")
-                .append("{" + vertex().toJson() + "}")
+                .append("{" + vertex.toJson() + "}")
                 .append(",\"bounds\":")
-                .append("{" + bounds().toJson() + "}")
+                .append("{" + bounds.toJson() + "}")
                 .append(",\"radius\":")
-                .append(to_string(radius()))
+                .append(to_string(radius))
                 .append(",\"radians\":")
-                .append(to_string(radians()))
+                .append(to_string(radians))
                 .append(",\"rotation\":")
-                .append(to_string(rotation()));
+                .append(to_string(rotation));
     }
 
 
 private:
-    Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end),
-                                                        center(centerOf(begin, middle, end)) {}
+    Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end), center(centerOf(begin, middle, end)) {}
+
+    initializer_list<double> dxs() const {
+        return initializer_list<double>{begin.dx, middle.dx, end.dx};
+    }
+
+    initializer_list<double> dys() const {
+        return initializer_list<double>{begin.dy, middle.dy, end.dy};
+    }
 };
 
 struct Path {
@@ -320,8 +281,7 @@ public:
     const Incircle left;
     const Incircle right;
 
-    Path(Incircle top, Incircle left, Incircle right) : top(std::move(top)), left(std::move(left)),
-                                                        right(std::move(right)) {}
+    Path(Incircle top, Incircle left, Incircle right) : top(std::move(top)), left(std::move(left)), right(std::move(right)) {}
 
     string toJson() const {
         return string()
@@ -343,7 +303,7 @@ const char *cornerPath(double width, double height, double radius, double blRadi
     const double leftRadius = blRadius == NAN ? radius : blRadius;
     const double rightRadius = brRadius == NAN ? radius : brRadius;
 
-    const double topRadians = size.semiRadians();
+    const double topRadians = size.semiRadians;
     const Offset topOffset = Offset(width / 2, 0);
     const Incircle top = Incircle::fromSize(size, topRadius, avoidOffset).shift(topOffset);
 
@@ -361,5 +321,3 @@ const char *cornerPath(double width, double height, double radius, double blRadi
     char *str = new char[strlen(json.c_str()) + 1];
     return strcpy(str, json.c_str());
 }
-
-#pragma clang diagnostic pop
