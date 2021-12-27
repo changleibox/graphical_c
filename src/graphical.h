@@ -7,6 +7,8 @@
 #include <vector>
 #include <sstream>
 
+#define DART_API extern "C" __attribute__((visibility("default"))) __attribute__((used))
+
 #ifndef GRAPHICAL_GRAPHICAL_H
 #define GRAPHICAL_GRAPHICAL_H
 
@@ -27,8 +29,6 @@ const double r270 = r180 * 3 / 2;
 
 /// 360度对应的弧度
 const double r360 = r180 * 2;
-
-extern "C" {
 
 struct Offset {
 public:
@@ -365,23 +365,21 @@ public:
     }
 };
 
-struct Incircle *fromRadians(double radians, double radius);
+DART_API struct Incircle *fromRadians(double radians, double radius);
 
-struct Incircle *fromSize(double width, double height, double radius, bool avoidOffset = false);
+DART_API struct Incircle *fromSize(double width, double height, double radius, bool avoidOffset = false);
 
-const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
+DART_API const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
 
-double pi();
+DART_API double pi();
 
-double radians90();
+DART_API double radians90();
 
-double radians180();
+DART_API double radians180();
 
-double radians270();
+DART_API double radians270();
 
-double radians360();
-
-}
+DART_API double radians360();
 
 #pragma clang diagnostic pop
 
