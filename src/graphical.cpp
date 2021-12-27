@@ -6,6 +6,9 @@
 
 using namespace std;
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "LocalValueEscapesScope"
+
 struct Path {
 public:
     const struct Incircle top;
@@ -37,12 +40,16 @@ public:
     }
 };
 
-Incircle fromRadians(double radians, double radius) {
-    return Incircle::fromRadians(radians, radius);
+const Incircle *fromRadians(double radians, double radius) {
+    const struct Incircle incircle = Incircle::fromRadians(radians, radius);
+    const struct Incircle *pIncircle = &incircle;
+    return pIncircle;
 }
 
-Incircle fromSize(double width, double height, double radius, bool avoidOffset) {
-    return Incircle::fromSize({width, height}, radius, avoidOffset);
+const Incircle *fromSize(double width, double height, double radius, bool avoidOffset) {
+    const struct Incircle incircle = Incircle::fromSize({width, height}, radius, avoidOffset);
+    const struct Incircle *pIncircle = &incircle;
+    return pIncircle;
 }
 
 /// 创建各个角
@@ -90,3 +97,5 @@ double radians270() {
 double radians360() {
     return r360;
 }
+
+#pragma clang diagnostic pop

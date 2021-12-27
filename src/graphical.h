@@ -356,9 +356,9 @@ public:
     }
 };
 
-Incircle fromRadians(double radians, double radius);
+const Incircle *fromRadians(double radians, double radius);
 
-Incircle fromSize(double width, double height, double radius, bool avoidOffset = false);
+const Incircle *fromSize(double width, double height, double radius, bool avoidOffset = false);
 
 const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
 
