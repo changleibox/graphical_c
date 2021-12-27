@@ -7,7 +7,8 @@
 #include <vector>
 #include <sstream>
 
-using namespace std;
+#ifndef GRAPHICAL_GRAPHICAL_H
+#define GRAPHICAL_GRAPHICAL_H
 
 /// 180度对应的弧度
 const double r180 = M_PI;
@@ -20,9 +21,6 @@ const double r270 = r180 * 3 / 2;
 
 /// 360度对应的弧度
 const double r360 = r180 * 2;
-
-#ifndef GRAPHICAL_GRAPHICAL_H
-#define GRAPHICAL_GRAPHICAL_H
 
 extern "C" {
 
