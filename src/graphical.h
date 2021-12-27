@@ -24,18 +24,10 @@ const double radians360 = radians180 * 2;
 #ifndef GRAPHICAL_GRAPHICAL_H
 #define GRAPHICAL_GRAPHICAL_H
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-#pragma ide diagnostic ignored "ArgumentSelectionDefects"
-#pragma clang diagnostic ignored "-Wreturn-stack-address"
-
 extern "C" {
 
 const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
 
 }
-
-#pragma clang diagnostic pop
-
 
 #endif //GRAPHICAL_GRAPHICAL_H
