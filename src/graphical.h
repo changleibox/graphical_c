@@ -365,9 +365,9 @@ public:
     }
 };
 
-struct Incircle fromRadians(double radians, double radius);
+struct Incircle *fromRadians(double radians, double radius);
 
-struct Incircle fromSize(double width, double height, double radius, bool avoidOffset = false);
+struct Incircle *fromSize(double width, double height, double radius, bool avoidOffset = false);
 
 const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
 

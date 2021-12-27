@@ -6,6 +6,9 @@
 
 using namespace std;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-stack-address"
+
 struct Path {
 public:
     const struct Incircle top;
@@ -37,12 +40,14 @@ public:
     }
 };
 
-struct Incircle fromRadians(double radians, double radius) {
-    return Incircle::fromRadians(radians, radius);
+struct Incircle *fromRadians(double radians, double radius) {
+    struct Incircle incircle = Incircle::fromRadians(radians, radius);
+    return &incircle;
 }
 
-struct Incircle fromSize(double width, double height, double radius, bool avoidOffset) {
-    return Incircle::fromSize({width, height}, radius, avoidOffset);
+struct Incircle *fromSize(double width, double height, double radius, bool avoidOffset) {
+    struct Incircle incircle = Incircle::fromSize({width, height}, radius, avoidOffset);
+    return &incircle;
 }
 
 /// 创建各个角
@@ -90,3 +95,5 @@ double radians270() {
 double radians360() {
     return r360;
 }
+
+#pragma clang diagnostic pop
