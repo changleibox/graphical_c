@@ -24,6 +24,16 @@ const double r360 = r180 * 2;
 
 extern "C" {
 
+struct Offset;
+
+struct Size;
+
+struct Rect;
+
+struct Incircle;
+
+struct Path;
+
 const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
 
 double pi();
