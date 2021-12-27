@@ -71,10 +71,12 @@ public:
 
     string toJson() const {
         return string()
+                .append("{")
                 .append("\"dx\":")
                 .append(to_string(dx))
                 .append(",\"dy\":")
-                .append(to_string(dy));
+                .append(to_string(dy))
+                .append("}");
     }
 
     bool operator==(const Offset &rhs) const {
@@ -107,6 +109,7 @@ public:
 
     string toJson() const {
         return string()
+                .append("{")
                 .append("\"width\":")
                 .append(to_string(width))
                 .append(",\"height\":")
@@ -116,7 +119,8 @@ public:
                 .append(",\"radians\":")
                 .append(to_string(radians))
                 .append(",\"distance\":")
-                .append(to_string(distance));
+                .append(to_string(distance))
+                .append("}");
     }
 
     bool operator==(const Size &rhs) const {
@@ -159,6 +163,7 @@ public:
 
     string toJson() const {
         return string()
+                .append("{")
                 .append("\"left\":")
                 .append(to_string(left))
                 .append(",\"top\":")
@@ -168,7 +173,8 @@ public:
                 .append(",\"bottom\":")
                 .append(to_string(bottom))
                 .append(",\"size\":")
-                .append("{" + size.toJson() + "}");
+                .append(size.toJson())
+                .append("}");
     }
 
     bool operator==(const Rect &rhs) const {
@@ -301,26 +307,28 @@ public:
 
     string toJson() const {
         return string()
+                .append("{")
                 .append("\"begin\":")
-                .append("{" + begin.toJson() + "}")
+                .append(begin.toJson())
                 .append(",\"middle\":")
-                .append("{" + middle.toJson() + "}")
+                .append(middle.toJson())
                 .append(",\"end\":")
-                .append("{" + end.toJson() + "}")
+                .append(end.toJson())
                 .append(",\"center\":")
-                .append("{" + center.toJson() + "}")
+                .append(center.toJson())
                 .append(",\"circle\":")
-                .append("{" + circle.toJson() + "}")
+                .append(circle.toJson())
                 .append(",\"vertex\":")
-                .append("{" + vertex.toJson() + "}")
+                .append(vertex.toJson())
                 .append(",\"bounds\":")
-                .append("{" + bounds.toJson() + "}")
+                .append(bounds.toJson())
                 .append(",\"radius\":")
                 .append(to_string(radius))
                 .append(",\"radians\":")
                 .append(to_string(radians))
                 .append(",\"rotation\":")
-                .append(to_string(rotation));
+                .append(to_string(rotation))
+                .append("}");
     }
 
 

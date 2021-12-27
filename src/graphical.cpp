@@ -21,11 +21,11 @@ public:
         return string()
                 .append("{")
                 .append("\"top\":")
-                .append("{" + top.toJson() + "}")
+                .append(top.toJson())
                 .append(",\"left\":")
-                .append("{" + left.toJson() + "}")
+                .append(left.toJson())
                 .append(",\"right\":")
-                .append("{" + right.toJson() + "}")
+                .append(right.toJson())
                 .append("}");
     }
 
