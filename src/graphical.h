@@ -356,37 +356,6 @@ public:
     }
 };
 
-struct Path {
-public:
-    const struct Incircle top;
-    const struct Incircle left;
-    const struct Incircle right;
-
-    Path(Incircle top, Incircle left, Incircle right) : top(std::move(top)), left(std::move(left)), right(std::move(right)) {}
-
-    string toJson() const {
-        return string()
-                .append("{")
-                .append("\"top\":")
-                .append("{" + top.toJson() + "}")
-                .append(",\"left\":")
-                .append("{" + left.toJson() + "}")
-                .append(",\"right\":")
-                .append("{" + right.toJson() + "}")
-                .append("}");
-    }
-
-    bool operator==(const Path &rhs) const {
-        return top == rhs.top &&
-               left == rhs.left &&
-               right == rhs.right;
-    }
-
-    bool operator!=(const Path &rhs) const {
-        return !(rhs == *this);
-    }
-};
-
 Incircle fromRadians(double radians, double radius);
 
 Incircle fromSize(double width, double height, double radius, bool avoidOffset = false);
