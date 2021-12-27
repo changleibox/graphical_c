@@ -1,10 +1,15 @@
-#include <iostream>
 #include "src/graphical.h"
 
 using namespace std;
 
 int main() {
-    const char *json = cornerPath(100, 100, 8, 8, 8, false);
-    std::cout << json << endl;
+    cornerPath(100, 100, 8, 8, 8, false);
+    fromSize(80, 80, 8, false);
+    fromRadians(1, 8);
+    radians90();
+    radians180();
+    radians270();
+    radians360();
+    pi();
     return 0;
 }
