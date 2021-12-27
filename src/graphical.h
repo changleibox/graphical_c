@@ -13,6 +13,7 @@
 using namespace std;
 
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
 /// 180度对应的弧度
@@ -364,9 +365,9 @@ public:
     }
 };
 
-const Incircle *fromRadians(double radians, double radius);
+struct Incircle fromRadians(double radians, double radius);
 
-const Incircle *fromSize(double width, double height, double radius, bool avoidOffset = false);
+struct Incircle fromSize(double width, double height, double radius, bool avoidOffset = false);
 
 const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
 
