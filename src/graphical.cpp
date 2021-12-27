@@ -97,6 +97,8 @@ public:
 
     Rect(double left, double top, double right, double bottom) : left(left), top(top), right(right), bottom(bottom) {}
 
+    Size size{Size(right - left, bottom - top)};
+
     static Rect fromCenter(Offset center, double width, double height) {
         return {
                 center.dx - width / 2,
@@ -119,7 +121,9 @@ public:
                 .append(",\"right\":")
                 .append(to_string(right))
                 .append(",\"bottom\":")
-                .append(to_string(bottom));
+                .append(to_string(bottom))
+                .append(",\"size\":")
+                .append("{" + size.toJson() + "}");
     }
 };
 
@@ -174,7 +178,7 @@ public:
     const Offset vertex{Offset(middle.dx + (radius / sin(radians) - radius) * sin(rotation), middle.dy - (radius / sin(radians) - radius) * cos(rotation))};
 
     /// 边界
-    const Rect bounds{Rect(min(dxs()), min(dys()), max(dxs()), max(dys()))};
+    const Rect bounds{Rect(dxs().first, dys().first, dxs().second, dys().second)};
 
     /// Returns a new [Incircle] translated by the given offset.
     ///
@@ -266,12 +270,14 @@ public:
 private:
     Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end), center(centerOf(begin, middle, end)) {}
 
-    initializer_list<double> dxs() const {
-        return initializer_list<double>{begin.dx, middle.dx, end.dx};
+    pair<double, double> dxs() const {
+        initializer_list<double> dxs{begin.dx, middle.dx, end.dx};
+        return make_pair(min(dxs), max(dxs));
     }
 
-    initializer_list<double> dys() const {
-        return initializer_list<double>{begin.dy, middle.dy, end.dy};
+    pair<double, double> dys() const {
+        initializer_list<double> dys{begin.dy, middle.dy, end.dy};
+        return make_pair(min(dys), max(dys));
     }
 };
 
