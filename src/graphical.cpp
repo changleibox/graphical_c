@@ -158,6 +158,9 @@ public:
 
 struct Incircle {
 public:
+    const Offset begin;
+    const Offset middle;
+    const Offset end;
     const Offset center;
 
     /// 根据一个角度和角内切圆的半径构建一个[Incircle]，[radians]为角对应的弧度，[radius]内切圆半径
@@ -307,10 +310,6 @@ public:
 
 
 private:
-    const Offset begin;
-    const Offset middle;
-    const Offset end;
-
     Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end),
                                                         center(centerOf(begin, middle, end)) {}
 };
