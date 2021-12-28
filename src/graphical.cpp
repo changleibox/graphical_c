@@ -14,7 +14,7 @@ using namespace std;
 #pragma clang diagnostic ignored "-Wreturn-stack-address"
 
 /// 创建各个角
-const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset) {
+struct Path cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset) {
     const Size size = Size(width, height);
     const double topRadius = radius;
     const double leftRadius = blRadius;
@@ -33,10 +33,7 @@ const char *cornerPath(double width, double height, double radius, double blRadi
     const double rightRotation = r270 - leftRadians;
     const Offset rightOffset = Offset(width, height);
     const Incircle right = Incircle::fromRadians(rightRadians, rightRadius).rotationZ(rightRotation).shift(rightOffset);
-    const Path path = {top, left, right};
-    const string &json = path.toJson();
-    char *str = new char[strlen(json.c_str()) + 1];
-    return strcpy(str, json.c_str());
+    return {top, left, right};
 }
 
 double pi() {

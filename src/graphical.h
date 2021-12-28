@@ -33,7 +33,7 @@ const double r270 = r180 * 3 / 2;
 /// 360度对应的弧度
 const double r360 = r180 * 2;
 
-DART_API const char *cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
+DART_API struct Path cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
 
 DART_API double pi();
 
