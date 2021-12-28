@@ -82,6 +82,12 @@ DART_API struct Offset Offset_init(double dx, double dy);
 
 DART_API struct Offset Offset_fromDirection(double direction, double distance);
 
+DART_API struct Offset Offset_rotationX(Offset offset, double radians);
+
+DART_API struct Offset Offset_rotationY(Offset offset, double radians);
+
+DART_API struct Offset Offset_rotationZ(Offset offset, double radians);
+
 #pragma clang diagnostic pop
 
 #endif //GRAPHICAL_OFFSET_H
