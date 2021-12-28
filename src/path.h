@@ -2,8 +2,11 @@
 // Created by changlei on 2021/12/28.
 //
 
+#pragma once
+
 #ifndef GRAPHICAL_PATH_H
 #define GRAPHICAL_PATH_H
+
 
 #include <string>
 #include "incircle.h"
@@ -49,5 +52,6 @@ DART_API struct Path Path_init(Incircle top, Incircle left, Incircle right);
 DART_API const char *Path_toJson(Path path);
 
 #pragma clang diagnostic pop
+
 
 #endif //GRAPHICAL_PATH_H

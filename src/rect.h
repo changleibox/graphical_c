@@ -2,8 +2,11 @@
 // Created by changlei on 2021/12/28.
 //
 
+#pragma once
+
 #ifndef GRAPHICAL_RECT_H
 #define GRAPHICAL_RECT_H
+
 
 #include "size.h"
 #include "offset.h"
@@ -158,6 +161,18 @@ public:
         return offset.dx >= left && offset.dx < right && offset.dy >= top && offset.dy < bottom;
     }
 
+    bool isInfinite() const {
+        return left >= DBL_MAX || top >= DBL_MAX || right >= DBL_MAX || bottom >= DBL_MAX;
+    }
+
+    bool isFinite() const {
+        return !isinf(left) && !isinf(top) && !isinf(right) && !isinf(bottom);
+    }
+
+    bool isEmpty() const {
+        return left >= right || top >= bottom;
+    }
+
     string toJson() const {
         return string()
                 .append("{")
@@ -214,5 +229,6 @@ DART_API bool overlaps(Rect rect, Rect other);
 DART_API bool contains(Rect rect, Offset offset);
 
 #pragma clang diagnostic pop
+
 
 #endif //GRAPHICAL_RECT_H

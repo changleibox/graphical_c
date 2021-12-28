@@ -2,8 +2,11 @@
 // Created by changlei on 2021/12/28.
 //
 
+#pragma once
+
 #ifndef GRAPHICAL_INCIRCLE_H
 #define GRAPHICAL_INCIRCLE_H
+
 
 #include <cmath>
 #include "size.h"
@@ -210,5 +213,6 @@ DART_API double Incircle_offsetOf(Size size, double radius);
 DART_API struct Offset Incircle_centerOf(Offset point1, Offset point2, Offset point3);
 
 #pragma clang diagnostic pop
+
 
 #endif //GRAPHICAL_INCIRCLE_H

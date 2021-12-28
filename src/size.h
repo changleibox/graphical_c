@@ -2,14 +2,18 @@
 // Created by changlei on 2021/12/28.
 //
 
+#pragma once
+
 #ifndef GRAPHICAL_SIZE_H
 #define GRAPHICAL_SIZE_H
+
 
 #include <cmath>
 #include <string>
 #include <cfloat>
 #include "graphical.h"
 #include "offset.h"
+#include "offset_base.h"
 
 using namespace std;
 
@@ -18,12 +22,12 @@ using namespace std;
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "ArgumentSelectionDefects"
 
-struct Size {
+struct Size : public OffsetBase {
 public:
-    const double width;
-    const double height;
+    const double width{_dx};
+    const double height{_dy};
 
-    Size(double width, double height) : width(width), height(height) {}
+    Size(double width, double height) : OffsetBase(width, height) {}
 
     static Size copy(Size source) {
         return {source.width, source.height};
@@ -71,6 +75,10 @@ public:
             return -DBL_MAX;
         }
         return 0.0;
+    }
+
+    bool isEmpty() const {
+        return width <= 0 || height <= 0;
     }
 
     // Convenience methods that do the equivalent of calling the similarly named
@@ -185,6 +193,22 @@ public:
                 .append("}");
     }
 
+    Size operator+(const Size &other) const {
+        return {width + other.width, height + other.height};
+    }
+
+    Size operator-(const Size &other) const {
+        return {width - other.width, height - other.height};
+    }
+
+    Size operator*(const double operand) const {
+        return {width * operand, height * operand};
+    }
+
+    Size operator/(const double operand) const {
+        return {width / operand, height / operand};
+    }
+
     bool operator==(const Size &rhs) const {
         return width == rhs.width &&
                height == rhs.height &&
@@ -236,5 +260,6 @@ DART_API bool Size_contains(Size size, Offset offset);
 DART_API struct Size Size_flipped(Size size);
 
 #pragma clang diagnostic pop
+
 
 #endif //GRAPHICAL_SIZE_H

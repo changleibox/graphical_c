@@ -2,6 +2,7 @@
 // Created by changlei on 2021/12/23.
 //
 
+#pragma once
 
 #include <string>
 #include <cmath>
@@ -13,7 +14,6 @@
 #ifndef GRAPHICAL_GRAPHICAL_H
 #define GRAPHICAL_GRAPHICAL_H
 
-#pragma pack(1)
 
 using namespace std;
 
@@ -47,6 +47,5 @@ DART_API double Graphical_radians360();
 
 #pragma clang diagnostic pop
 
-#pragma pack()
 
 #endif //GRAPHICAL_GRAPHICAL_H

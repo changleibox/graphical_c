@@ -2,12 +2,17 @@
 // Created by changlei on 2021/12/28.
 //
 
+#pragma once
+
 #ifndef GRAPHICAL_OFFSET_H
 #define GRAPHICAL_OFFSET_H
 
+
 #include <cmath>
 #include <string>
+#include <ostream>
 #include "graphical.h"
+#include "offset_base.h"
 
 using namespace std;
 
@@ -15,12 +20,12 @@ using namespace std;
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
-struct Offset {
+struct Offset : public OffsetBase {
 public:
-    const double dx;
-    const double dy;
+    const double dx{_dx};
+    const double dy{_dy};
 
-    Offset(double dx, double dy) : dx(dx), dy(dy) {}
+    Offset(double dx, double dy) : OffsetBase(dx, dy) {}
 
     /// The magnitude of the offset.
     ///
@@ -49,12 +54,24 @@ public:
         return {dx * newCos - dy * newSin, dy * newCos + dx * newSin};
     }
 
+    Offset operator-() const {
+        return {-dx, -dy};
+    }
+
     Offset operator+(const Offset &other) const {
         return {dx + other.dx, dy + other.dy};
     }
 
     Offset operator-(const Offset &other) const {
         return {dx - other.dx, dy - other.dy};
+    }
+
+    Offset operator*(double operand) const {
+        return {dx * operand, dy * operand};
+    }
+
+    Offset operator/(double operand) const {
+        return {dx / operand, dy / operand};
     }
 
     string toJson() const {
@@ -77,6 +94,11 @@ public:
     bool operator!=(const Offset &rhs) const {
         return !(rhs == *this);
     }
+
+    friend ostream &operator<<(ostream &os, const Offset &offset) {
+        os << static_cast<const OffsetBase &>(offset) << " dx: " << offset.dx << " dy: " << offset.dy;
+        return os;
+    }
 };
 
 DART_API struct Offset Offset_init(double dx, double dy);
@@ -90,5 +112,6 @@ DART_API struct Offset Offset_rotationY(Offset offset, double radians);
 DART_API struct Offset Offset_rotationZ(Offset offset, double radians);
 
 #pragma clang diagnostic pop
+
 
 #endif //GRAPHICAL_OFFSET_H
