@@ -15,11 +15,11 @@ using namespace std;
 
 struct Path {
 public:
-    const struct incircle top;
-    const struct incircle left;
-    const struct incircle right;
+    const struct Incircle top;
+    const struct Incircle left;
+    const struct Incircle right;
 
-    Path(incircle top, incircle left, incircle right) : top(std::move(top)), left(std::move(left)), right(std::move(right)) {}
+    Path(Incircle top, Incircle left, Incircle right) : top(std::move(top)), left(std::move(left)), right(std::move(right)) {}
 
     string toJson() const {
         return string()
@@ -44,7 +44,7 @@ public:
     }
 };
 
-DART_API struct Path Path_init(incircle top, incircle left, incircle right);
+DART_API struct Path Path_init(Incircle top, Incircle left, Incircle right);
 
 DART_API const char *Path_toJson(Path path);
 

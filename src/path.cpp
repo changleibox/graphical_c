@@ -10,7 +10,7 @@ using namespace std;
 #pragma clang diagnostic ignored "-Wreturn-stack-address"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
-struct Path Path_init(incircle top, incircle left, incircle right) {
+struct Path Path_init(Incircle top, Incircle left, Incircle right) {
     return {top, left, right};
 }
 

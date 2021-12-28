@@ -21,17 +21,17 @@ struct Path Graphical_cornerPath(double width, double height, double radius, dou
 
     const double topRadians = size.semiRadians;
     const Offset topOffset = Offset(width / 2, 0);
-    const incircle top = incircle::fromSize(size, topRadius, avoidOffset).shift(topOffset);
+    const Incircle top = Incircle::fromSize(size, topRadius, avoidOffset).shift(topOffset);
 
     const double leftRadians = (r90 + topRadians) / 2;
     const double leftRotation = r90 + leftRadians;
     const Offset leftOffset = Offset(0, height);
-    const incircle left = incircle::fromRadians(leftRadians, leftRadius).rotationZ(leftRotation).shift(leftOffset);
+    const Incircle left = Incircle::fromRadians(leftRadians, leftRadius).rotationZ(leftRotation).shift(leftOffset);
 
     const double rightRadians = (r90 + topRadians) / 2;
     const double rightRotation = r270 - leftRadians;
     const Offset rightOffset = Offset(width, height);
-    const incircle right = incircle::fromRadians(rightRadians, rightRadius).rotationZ(rightRotation).shift(rightOffset);
+    const Incircle right = Incircle::fromRadians(rightRadians, rightRadius).rotationZ(rightRotation).shift(rightOffset);
     return {top, left, right};
 }
 
