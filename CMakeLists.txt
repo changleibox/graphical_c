@@ -10,7 +10,7 @@ add_library(${PROJECT_NAME} SHARED
         src/offset.cpp
         src/size.cpp
         src/rect.cpp
-        src/path.cpp src/offset_base.cpp src/offset_base.h)
+        src/path.cpp)
 
 add_executable(${PROJECT_NAME}_test main.cpp
         src/graphical.cpp

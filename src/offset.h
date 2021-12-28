@@ -10,9 +10,8 @@
 
 #include <cmath>
 #include <string>
-#include <ostream>
+#include <cfloat>
 #include "graphical.h"
-#include "offset_base.h"
 
 using namespace std;
 
@@ -20,12 +19,12 @@ using namespace std;
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
-struct Offset : public OffsetBase {
+struct Offset {
 public:
-    const double dx{_dx};
-    const double dy{_dy};
+    const double dx;
+    const double dy;
 
-    Offset(double dx, double dy) : OffsetBase(dx, dy) {}
+    Offset(double dx, double dy) : dx(dx), dy(dy) {}
 
     /// The magnitude of the offset.
     ///
@@ -74,6 +73,30 @@ public:
         return {dx / operand, dy / operand};
     }
 
+    bool isInfinite() const {
+        return dx >= DBL_MAX || dy >= DBL_MAX;
+    }
+
+    bool isFinite() const {
+        return !isinf(dx) && !isinf(dy);
+    }
+
+    bool operator<(const Offset &other) const {
+        return dx < other.dx && dy < other.dy;
+    }
+
+    bool operator<=(const Offset &other) const {
+        return dx <= other.dx && dy <= other.dy;
+    }
+
+    bool operator>(const Offset &other) const {
+        return dx > other.dx && dy > other.dy;
+    }
+
+    bool operator>=(const Offset &other) const {
+        return dx >= other.dx && dy >= other.dy;
+    }
+
     string toJson() const {
         return string()
                 .append("{")
@@ -93,11 +116,6 @@ public:
 
     bool operator!=(const Offset &rhs) const {
         return !(rhs == *this);
-    }
-
-    friend ostream &operator<<(ostream &os, const Offset &offset) {
-        os << static_cast<const OffsetBase &>(offset) << " dx: " << offset.dx << " dy: " << offset.dy;
-        return os;
     }
 };
 

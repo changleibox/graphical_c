@@ -13,7 +13,6 @@
 #include <cfloat>
 #include "graphical.h"
 #include "offset.h"
-#include "offset_base.h"
 
 using namespace std;
 
@@ -22,12 +21,12 @@ using namespace std;
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "ArgumentSelectionDefects"
 
-struct Size : public OffsetBase {
+struct Size {
 public:
-    const double width{_dx};
-    const double height{_dy};
+    const double width;
+    const double height;
 
-    Size(double width, double height) : OffsetBase(width, height) {}
+    Size(double width, double height) : width(width), height(height) {}
 
     static Size copy(Size source) {
         return {source.width, source.height};
@@ -191,6 +190,30 @@ public:
                 .append(",\"distance\":")
                 .append(to_string(distance))
                 .append("}");
+    }
+
+    bool isInfinite() const {
+        return width >= DBL_MAX || height >= DBL_MAX;
+    }
+
+    bool isFinite() const {
+        return !isinf(width) && !isinf(height);
+    }
+
+    bool operator<(const Size &other) const {
+        return width < other.width && height < other.height;
+    }
+
+    bool operator<=(const Size &other) const {
+        return width <= other.width && height <= other.height;
+    }
+
+    bool operator>(const Size &other) const {
+        return width > other.width && height > other.height;
+    }
+
+    bool operator>=(const Size &other) const {
+        return width >= other.width && height >= other.height;
     }
 
     Size operator+(const Size &other) const {
