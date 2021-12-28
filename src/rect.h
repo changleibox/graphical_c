@@ -193,8 +193,7 @@ public:
         return left == rhs.left &&
                top == rhs.top &&
                right == rhs.right &&
-               bottom == rhs.bottom &&
-               size == rhs.size;
+               bottom == rhs.bottom;
     }
 
     bool operator!=(const Rect &rhs) const {

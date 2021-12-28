@@ -177,14 +177,7 @@ public:
     bool operator==(const Incircle &rhs) const {
         return begin == rhs.begin &&
                middle == rhs.middle &&
-               end == rhs.end &&
-               center == rhs.center &&
-               radius == rhs.radius &&
-               circle == rhs.circle &&
-               radians == rhs.radians &&
-               rotation == rhs.rotation &&
-               vertex == rhs.vertex &&
-               bounds == rhs.bounds;
+               end == rhs.end;
     }
 
     bool operator!=(const Incircle &rhs) const {

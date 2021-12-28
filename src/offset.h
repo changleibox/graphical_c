@@ -109,9 +109,7 @@ public:
 
     bool operator==(const Offset &rhs) const {
         return dx == rhs.dx &&
-               dy == rhs.dy &&
-               distance == rhs.distance &&
-               direction == rhs.direction;
+               dy == rhs.dy;
     }
 
     bool operator!=(const Offset &rhs) const {

@@ -234,11 +234,7 @@ public:
 
     bool operator==(const Size &rhs) const {
         return width == rhs.width &&
-               height == rhs.height &&
-               direction == rhs.direction &&
-               radians == rhs.radians &&
-               distance == rhs.distance &&
-               semiRadians == rhs.semiRadians;
+               height == rhs.height;
     }
 
     bool operator!=(const Size &rhs) const {
