@@ -46,6 +46,8 @@ public:
 
 DART_API struct Path Path_init(Incircle top, Incircle left, Incircle right);
 
+DART_API const char *Path_toJson(Path path);
+
 #pragma clang diagnostic pop
 
 #endif //GRAPHICAL_PATH_H
