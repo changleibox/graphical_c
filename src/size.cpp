@@ -37,4 +37,48 @@ double Size_aspectRatio(Size size) {
     return size.aspectRatio();
 }
 
+struct Offset Size_topLeft(Size size, Offset origin) {
+    return size.topLeft(origin);
+}
+
+struct Offset Size_topCenter(Size size, Offset origin) {
+    return size.topCenter(origin);
+}
+
+struct Offset Size_topRight(Size size, Offset origin) {
+    return size.topRight(origin);
+}
+
+struct Offset Size_centerLeft(Size size, Offset origin) {
+    return size.centerLeft(origin);
+}
+
+struct Offset Size_center(Size size, Offset origin) {
+    return size.center(origin);
+}
+
+struct Offset Size_centerRight(Size size, Offset origin) {
+    return size.centerRight(origin);
+}
+
+struct Offset Size_bottomLeft(Size size, Offset origin) {
+    return size.bottomLeft(origin);
+}
+
+struct Offset Size_bottomCenter(Size size, Offset origin) {
+    return size.bottomCenter(origin);
+}
+
+struct Offset Size_bottomRight(Size size, Offset origin) {
+    return size.bottomRight(origin);
+}
+
+bool Size_contains(Size size, Offset offset) {
+    return size.contains(offset);
+}
+
+struct Size Size_flipped(Size size) {
+    return size.flipped();
+}
+
 #pragma clang diagnostic pop

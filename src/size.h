@@ -213,6 +213,28 @@ DART_API struct Size Size_fromRadius(double radius);
 
 DART_API double Size_aspectRatio(Size size);
 
+DART_API struct Offset Size_topLeft(Size size, Offset origin);
+
+DART_API struct Offset Size_topCenter(Size size, Offset origin);
+
+DART_API struct Offset Size_topRight(Size size, Offset origin);
+
+DART_API struct Offset Size_centerLeft(Size size, Offset origin);
+
+DART_API struct Offset Size_center(Size size, Offset origin);
+
+DART_API struct Offset Size_centerRight(Size size, Offset origin);
+
+DART_API struct Offset Size_bottomLeft(Size size, Offset origin);
+
+DART_API struct Offset Size_bottomCenter(Size size, Offset origin);
+
+DART_API struct Offset Size_bottomRight(Size size, Offset origin);
+
+DART_API bool Size_contains(Size size, Offset offset);
+
+DART_API struct Size Size_flipped(Size size);
+
 #pragma clang diagnostic pop
 
 #endif //GRAPHICAL_SIZE_H
