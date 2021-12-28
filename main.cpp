@@ -1,4 +1,5 @@
 #include "src/graphical.h"
+#include "src/Incircle.h"
 
 using namespace std;
 
