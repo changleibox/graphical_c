@@ -1,9 +1,10 @@
 #include "src/graphical.h"
+#include "src/path.h"
 
 using namespace std;
 
 int main() {
-    // Graphical_cornerPath(100, 100, 8, 8, 8, false);
+    Graphical_cornerPath(100, 100, 8, 8, 8, false);
     Graphical_radians90();
     Graphical_radians180();
     Graphical_radians270();
