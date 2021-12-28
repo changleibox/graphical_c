@@ -40,43 +40,43 @@ public:
     }
 };
 
-struct Incircle *Incircle_fromRadians(double radians, double radius) {
+struct Incircle Incircle_fromRadians(double radians, double radius) {
     struct Incircle incircle = Incircle::fromRadians(radians, radius);
-    return &incircle;
+    return incircle;
 }
 
-struct Incircle *Incircle_fromSize(double width, double height, double radius, bool avoidOffset) {
+struct Incircle Incircle_fromSize(double width, double height, double radius, bool avoidOffset) {
     struct Incircle incircle = Incircle::fromSize({width, height}, radius, avoidOffset);
-    return &incircle;
+    return incircle;
 }
 
-struct Incircle *Incircle_shift(Incircle *incircle, double dx, double dy) {
-    struct Incircle newIncircle = incircle->shift({dx, dy});
-    return &newIncircle;
+struct Incircle Incircle_shift(Incircle incircle, double dx, double dy) {
+    struct Incircle newIncircle = incircle.shift({dx, dy});
+    return newIncircle;
 }
 
-struct Incircle *Incircle_rotationX(Incircle *incircle, double newRadians) {
-    struct Incircle newIncircle = incircle->rotationX(newRadians);
-    return &newIncircle;
+struct Incircle Incircle_rotationX(Incircle incircle, double newRadians) {
+    struct Incircle newIncircle = incircle.rotationX(newRadians);
+    return newIncircle;
 }
 
-struct Incircle *Incircle_rotationY(Incircle *incircle, double newRadians) {
-    struct Incircle newIncircle = incircle->rotationY(newRadians);
-    return &newIncircle;
+struct Incircle Incircle_rotationY(Incircle incircle, double newRadians) {
+    struct Incircle newIncircle = incircle.rotationY(newRadians);
+    return newIncircle;
 }
 
-struct Incircle *Incircle_rotationZ(Incircle *incircle, double newRadians) {
-    struct Incircle newIncircle = incircle->rotationZ(newRadians);
-    return &newIncircle;
+struct Incircle Incircle_rotationZ(Incircle incircle, double newRadians) {
+    struct Incircle newIncircle = incircle.rotationZ(newRadians);
+    return newIncircle;
 }
 
-struct Incircle *Incircle_flipped(Incircle *incircle) {
-    struct Incircle newIncircle = incircle->flipped();
-    return &newIncircle;
+struct Incircle Incircle_flipped(Incircle incircle) {
+    struct Incircle newIncircle = incircle.flipped();
+    return newIncircle;
 }
 
-const char *Incircle_toJson(Incircle *incircle) {
-    const string &json = incircle->toJson();
+const char *Incircle_toJson(Incircle incircle) {
+    const string &json = incircle.toJson();
     char *str = new char[strlen(json.c_str()) + 1];
     return strcpy(str, json.c_str());
 }

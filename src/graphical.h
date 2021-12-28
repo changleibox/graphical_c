@@ -365,21 +365,21 @@ public:
     }
 };
 
-DART_API struct Incircle *Incircle_fromRadians(double radians, double radius);
+DART_API struct Incircle Incircle_fromRadians(double radians, double radius);
 
-DART_API struct Incircle *Incircle_fromSize(double width, double height, double radius, bool avoidOffset = false);
+DART_API struct Incircle Incircle_fromSize(double width, double height, double radius, bool avoidOffset = false);
 
-DART_API struct Incircle *Incircle_shift(Incircle *incircle, double dx, double dy);
+DART_API struct Incircle Incircle_shift(Incircle incircle, double dx, double dy);
 
-DART_API struct Incircle *Incircle_rotationX(Incircle *incircle, double newRadians);
+DART_API struct Incircle Incircle_rotationX(Incircle incircle, double newRadians);
 
-DART_API struct Incircle *Incircle_rotationY(Incircle *incircle, double newRadians);
+DART_API struct Incircle Incircle_rotationY(Incircle incircle, double newRadians);
 
-DART_API struct Incircle *Incircle_rotationZ(Incircle *incircle, double newRadians);
+DART_API struct Incircle Incircle_rotationZ(Incircle incircle, double newRadians);
 
-DART_API struct Incircle *Incircle_flipped(Incircle *incircle);
+DART_API struct Incircle Incircle_flipped(Incircle incircle);
 
-DART_API const char *Incircle_toJson(Incircle *incircle);
+DART_API const char *Incircle_toJson(Incircle incircle);
 
 DART_API double Incircle_correctRadians(double radians);
 
