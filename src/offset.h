@@ -13,6 +13,7 @@ using namespace std;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
 struct Offset {
 public:
