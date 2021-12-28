@@ -1,16 +1,13 @@
 #include "src/graphical.h"
-#include "src/Incircle.h"
 
 using namespace std;
 
 int main() {
-    cornerPath(100, 100, 8, 8, 8, false);
-    Incircle_fromSize({80, 80}, 8, false);
-    Incircle_fromRadians(1, 8);
-    radians90();
-    radians180();
-    radians270();
-    radians360();
-    pi();
+    Graphical_cornerPath(100, 100, 8, 8, 8, false);
+    Graphical_radians90();
+    Graphical_radians180();
+    Graphical_radians270();
+    Graphical_radians360();
+    Graphical_pi();
     return 0;
 }

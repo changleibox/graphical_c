@@ -5,7 +5,7 @@
 #include "graphical.h"
 #include "size.h"
 #include "offset.h"
-#include "Incircle.h"
+#include "incircle.h"
 #include "path.h"
 
 using namespace std;
@@ -13,8 +13,7 @@ using namespace std;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wreturn-stack-address"
 
-/// 创建各个角
-struct Path cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset) {
+struct Path Graphical_cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset) {
     const Size size = Size(width, height);
     const double topRadius = radius;
     const double leftRadius = blRadius;
@@ -22,37 +21,37 @@ struct Path cornerPath(double width, double height, double radius, double blRadi
 
     const double topRadians = size.semiRadians;
     const Offset topOffset = Offset(width / 2, 0);
-    const Incircle top = Incircle::fromSize(size, topRadius, avoidOffset).shift(topOffset);
+    const incircle top = incircle::fromSize(size, topRadius, avoidOffset).shift(topOffset);
 
     const double leftRadians = (r90 + topRadians) / 2;
     const double leftRotation = r90 + leftRadians;
     const Offset leftOffset = Offset(0, height);
-    const Incircle left = Incircle::fromRadians(leftRadians, leftRadius).rotationZ(leftRotation).shift(leftOffset);
+    const incircle left = incircle::fromRadians(leftRadians, leftRadius).rotationZ(leftRotation).shift(leftOffset);
 
     const double rightRadians = (r90 + topRadians) / 2;
     const double rightRotation = r270 - leftRadians;
     const Offset rightOffset = Offset(width, height);
-    const Incircle right = Incircle::fromRadians(rightRadians, rightRadius).rotationZ(rightRotation).shift(rightOffset);
+    const incircle right = incircle::fromRadians(rightRadians, rightRadius).rotationZ(rightRotation).shift(rightOffset);
     return {top, left, right};
 }
 
-double pi() {
+double Graphical_pi() {
     return M_PI;
 }
 
-double radians90() {
+double Graphical_radians90() {
     return r90;
 }
 
-double radians180() {
+double Graphical_radians180() {
     return r180;
 }
 
-double radians270() {
+double Graphical_radians270() {
     return r270;
 }
 
-double radians360() {
+double Graphical_radians360() {
     return r360;
 }
 

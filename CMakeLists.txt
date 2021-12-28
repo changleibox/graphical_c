@@ -6,7 +6,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 add_library(${PROJECT_NAME} SHARED
         src/graphical.cpp
-        src/Incircle.cpp
+        src/incircle.cpp
         src/offset.cpp
         src/size.cpp
         src/rect.cpp
@@ -15,8 +15,8 @@ add_library(${PROJECT_NAME} SHARED
 add_executable(${PROJECT_NAME}_test main.cpp
         src/graphical.cpp
         src/graphical.h
-        src/Incircle.cpp
-        src/Incircle.h
+        src/incircle.cpp
+        src/incircle.h
         src/offset.cpp
         src/offset.h
         src/size.cpp

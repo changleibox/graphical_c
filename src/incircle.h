@@ -17,7 +17,7 @@ using namespace std;
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
-struct Incircle {
+struct incircle {
 public:
     const struct Offset begin;
     const struct Offset middle;
@@ -25,7 +25,7 @@ public:
     const struct Offset center;
 
     /// 根据一个角度和角内切圆的半径构建一个[Incircle]，[radians]为角对应的弧度，[radius]内切圆半径
-    static Incircle fromRadians(double radians, double radius) {
+    static incircle fromRadians(double radians, double radius) {
         double eg = radius * cos(radians);
         double ai = radius / sin(radians) - radius;
         double ag = ai + radius - radius * sin(radians);
@@ -34,21 +34,21 @@ public:
     }
 
     /// 根据一个角度和角内切圆的半径构建一个[Incircle]，以[size]作为等腰三角形的底和高计算顶角的弧度，[radius]内切圆半径
-    static Incircle fromSize(Size size, double radius, bool avoidOffset = false) {
+    static incircle fromSize(Size size, double radius, bool avoidOffset = false) {
         double width = size.width;
         double height = size.height;
         double offsetHeight = height;
         if (avoidOffset) {
-            offsetHeight = Incircle::offsetOf(size, radius);
+            offsetHeight = incircle::offsetOf(size, radius);
         }
         if (isinf(offsetHeight)) {
             const Size newSize(width, offsetHeight);
             const Offset offset(0, height - offsetHeight);
             double radians = newSize.semiRadians;
-            return Incircle::fromRadians(radians, radius).shift(offset);
+            return incircle::fromRadians(radians, radius).shift(offset);
         } else {
             double radians = size.semiRadians;
-            return Incircle::fromRadians(radians, radius);
+            return incircle::fromRadians(radians, radius);
         }
     }
 
@@ -74,27 +74,27 @@ public:
     ///
     /// To translate a rectangle by separate x and y components rather than by an
     /// [Offset], consider [translate].
-    Incircle shift(Offset offset) const {
+    incircle shift(Offset offset) const {
         return {begin + offset, middle + offset, end + offset};
     }
 
     /// 绕着Z轴顺时针旋转[newRadians]
-    Incircle rotationX(double newRadians) const {
+    incircle rotationX(double newRadians) const {
         return {begin.rotationX(newRadians), middle.rotationX(newRadians), end.rotationX(newRadians)};
     }
 
     /// 绕着Z轴顺时针旋转[newRadians]
-    Incircle rotationY(double newRadians) const {
+    incircle rotationY(double newRadians) const {
         return {begin.rotationY(newRadians), middle.rotationY(newRadians), end.rotationY(newRadians)};
     }
 
     /// 绕着Z轴顺时针旋转[newRadians]
-    Incircle rotationZ(double newRadians) const {
+    incircle rotationZ(double newRadians) const {
         return {begin.rotationZ(newRadians), middle.rotationZ(newRadians), end.rotationZ(newRadians)};
     }
 
     /// 绕着角平分线旋转180度
-    Incircle flipped() const {
+    incircle flipped() const {
         return {end, middle, begin};
     }
 
@@ -160,7 +160,7 @@ public:
 
 
 private:
-    Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end), center(centerOf(begin, middle, end)) {}
+    incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end), center(centerOf(begin, middle, end)) {}
 
     pair<double, double> dxs() const {
         return minmax(initializer_list<double>{begin.dx, middle.dx, end.dx});
@@ -171,7 +171,7 @@ private:
     }
 
 public:
-    bool operator==(const Incircle &rhs) const {
+    bool operator==(const incircle &rhs) const {
         return begin == rhs.begin &&
                middle == rhs.middle &&
                end == rhs.end &&
@@ -184,24 +184,24 @@ public:
                bounds == rhs.bounds;
     }
 
-    bool operator!=(const Incircle &rhs) const {
+    bool operator!=(const incircle &rhs) const {
         return !(rhs == *this);
     }
 };
 
-DART_API struct Incircle Incircle_fromRadians(double radians, double radius);
+DART_API struct incircle Incircle_fromRadians(double radians, double radius);
 
-DART_API struct Incircle Incircle_fromSize(Size size, double radius, bool avoidOffset = false);
+DART_API struct incircle Incircle_fromSize(Size size, double radius, bool avoidOffset = false);
 
-DART_API struct Incircle Incircle_shift(Incircle incircle, Offset offset);
+DART_API struct incircle Incircle_shift(incircle incircle, Offset offset);
 
-DART_API struct Incircle Incircle_rotationX(Incircle incircle, double newRadians);
+DART_API struct incircle Incircle_rotationX(incircle incircle, double newRadians);
 
-DART_API struct Incircle Incircle_rotationY(Incircle incircle, double newRadians);
+DART_API struct incircle Incircle_rotationY(incircle incircle, double newRadians);
 
-DART_API struct Incircle Incircle_rotationZ(Incircle incircle, double newRadians);
+DART_API struct incircle Incircle_rotationZ(incircle incircle, double newRadians);
 
-DART_API struct Incircle Incircle_flipped(Incircle incircle);
+DART_API struct incircle Incircle_flipped(incircle incircle);
 
 DART_API double Incircle_correctRadians(double radians);
 

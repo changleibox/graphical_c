@@ -33,17 +33,17 @@ const double r270 = r180 * 3 / 2;
 /// 360度对应的弧度
 const double r360 = r180 * 2;
 
-DART_API struct Path cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
+DART_API struct Path Graphical_cornerPath(double width, double height, double radius, double blRadius, double brRadius, bool avoidOffset);
 
-DART_API double pi();
+DART_API double Graphical_pi();
 
-DART_API double radians90();
+DART_API double Graphical_radians90();
 
-DART_API double radians180();
+DART_API double Graphical_radians180();
 
-DART_API double radians270();
+DART_API double Graphical_radians270();
 
-DART_API double radians360();
+DART_API double Graphical_radians360();
 
 #pragma clang diagnostic pop
 
