@@ -63,5 +63,6 @@ public:
     }
 };
 
+struct Rect Rect_init(double left, double top, double right, double bottom);
 
 #endif //GRAPHICAL_RECT_H

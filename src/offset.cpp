@@ -3,3 +3,7 @@
 //
 
 #include "offset.h"
+
+struct Offset Offset_init(double dx, double dy) {
+    return {dx, dy};
+}

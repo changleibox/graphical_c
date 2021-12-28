@@ -14,13 +14,13 @@ struct Incircle Incircle_fromRadians(double radians, double radius) {
     return incircle;
 }
 
-struct Incircle Incircle_fromSize(double width, double height, double radius, bool avoidOffset) {
-    struct Incircle incircle = Incircle::fromSize({width, height}, radius, avoidOffset);
+struct Incircle Incircle_fromSize(Size size, double radius, bool avoidOffset) {
+    struct Incircle incircle = Incircle::fromSize(size, radius, avoidOffset);
     return incircle;
 }
 
-struct Incircle Incircle_shift(Incircle incircle, double dx, double dy) {
-    struct Incircle newIncircle = incircle.shift({dx, dy});
+struct Incircle Incircle_shift(Incircle incircle, Offset offset) {
+    struct Incircle newIncircle = incircle.shift(offset);
     return newIncircle;
 }
 

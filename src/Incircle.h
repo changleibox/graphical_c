@@ -193,9 +193,9 @@ public:
 
 DART_API struct Incircle Incircle_fromRadians(double radians, double radius);
 
-DART_API struct Incircle Incircle_fromSize(double width, double height, double radius, bool avoidOffset = false);
+DART_API struct Incircle Incircle_fromSize(Size size, double radius, bool avoidOffset = false);
 
-DART_API struct Incircle Incircle_shift(Incircle incircle, double dx, double dy);
+DART_API struct Incircle Incircle_shift(Incircle incircle, Offset offset);
 
 DART_API struct Incircle Incircle_rotationX(Incircle incircle, double newRadians);
 

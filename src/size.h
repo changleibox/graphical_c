@@ -56,5 +56,8 @@ public:
     }
 };
 
+struct Size Size_init(double width, double height);
+
+struct Size Size_square(double dimension);
 
 #endif //GRAPHICAL_SIZE_H

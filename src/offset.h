@@ -72,5 +72,6 @@ public:
     }
 };
 
+struct Offset Offset_init(double dx, double dy);
 
 #endif //GRAPHICAL_OFFSET_H

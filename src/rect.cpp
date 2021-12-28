@@ -3,3 +3,7 @@
 //
 
 #include "rect.h"
+
+struct Rect Rect_init(double left, double top, double right, double bottom) {
+    return {left, top, right, bottom};
+}
