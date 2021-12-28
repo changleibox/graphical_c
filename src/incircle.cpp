@@ -9,51 +9,51 @@ using namespace std;
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
-struct incircle Incircle_fromRadians(double radians, double radius) {
-    struct incircle incircle = incircle::fromRadians(radians, radius);
+struct Incircle Incircle_fromRadians(double radians, double radius) {
+    struct Incircle incircle = Incircle::fromRadians(radians, radius);
     return incircle;
 }
 
-struct incircle Incircle_fromSize(Size size, double radius, bool avoidOffset) {
-    struct incircle incircle = incircle::fromSize(size, radius, avoidOffset);
+struct Incircle Incircle_fromSize(Size size, double radius, bool avoidOffset) {
+    struct Incircle incircle = Incircle::fromSize(size, radius, avoidOffset);
     return incircle;
 }
 
-struct incircle Incircle_shift(incircle incircle, Offset offset) {
-    struct incircle newIncircle = incircle.shift(offset);
+struct Incircle Incircle_shift(Incircle incircle, Offset offset) {
+    struct Incircle newIncircle = incircle.shift(offset);
     return newIncircle;
 }
 
-struct incircle Incircle_rotationX(incircle incircle, double newRadians) {
-    struct incircle newIncircle = incircle.rotationX(newRadians);
+struct Incircle Incircle_rotationX(Incircle incircle, double newRadians) {
+    struct Incircle newIncircle = incircle.rotationX(newRadians);
     return newIncircle;
 }
 
-struct incircle Incircle_rotationY(incircle incircle, double newRadians) {
-    struct incircle newIncircle = incircle.rotationY(newRadians);
+struct Incircle Incircle_rotationY(Incircle incircle, double newRadians) {
+    struct Incircle newIncircle = incircle.rotationY(newRadians);
     return newIncircle;
 }
 
-struct incircle Incircle_rotationZ(incircle incircle, double newRadians) {
-    struct incircle newIncircle = incircle.rotationZ(newRadians);
+struct Incircle Incircle_rotationZ(Incircle incircle, double newRadians) {
+    struct Incircle newIncircle = incircle.rotationZ(newRadians);
     return newIncircle;
 }
 
-struct incircle Incircle_flipped(incircle incircle) {
-    struct incircle newIncircle = incircle.flipped();
+struct Incircle Incircle_flipped(Incircle incircle) {
+    struct Incircle newIncircle = incircle.flipped();
     return newIncircle;
 }
 
 double Incircle_correctRadians(double radians) {
-    return incircle::correctRadians(radians);
+    return Incircle::correctRadians(radians);
 }
 
 double Incircle_offsetOf(Size size, double radius) {
-    return incircle::offsetOf(size, radius);
+    return Incircle::offsetOf(size, radius);
 }
 
 struct Offset Incircle_centerOf(Offset point1, Offset point2, Offset point3) {
-    return incircle::centerOf(point1, point2, point3);
+    return Incircle::centerOf(point1, point2, point3);
 }
 
 #pragma clang diagnostic pop
