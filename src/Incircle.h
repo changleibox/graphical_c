@@ -203,8 +203,6 @@ DART_API struct Incircle Incircle_rotationZ(Incircle incircle, double newRadians
 
 DART_API struct Incircle Incircle_flipped(Incircle incircle);
 
-DART_API const char *Incircle_toJson(Incircle incircle);
-
 DART_API double Incircle_correctRadians(double radians);
 
 DART_API double Incircle_offsetOf(Size size, double radius);

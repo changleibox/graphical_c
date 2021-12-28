@@ -44,12 +44,6 @@ struct Incircle Incircle_flipped(Incircle incircle) {
     return newIncircle;
 }
 
-const char *Incircle_toJson(Incircle incircle) {
-    const string &json = incircle.toJson();
-    char *str = new char[strlen(json.c_str()) + 1];
-    return strcpy(str, json.c_str());
-}
-
 double Incircle_correctRadians(double radians) {
     return Incircle::correctRadians(radians);
 }
