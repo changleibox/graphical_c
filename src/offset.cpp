@@ -13,4 +13,8 @@ struct Offset Offset_init(double dx, double dy) {
     return {dx, dy};
 }
 
+struct Offset Offset_fromDirection(double direction, double distance) {
+    return {distance * cos(direction), distance * sin(direction)};
+}
+
 #pragma clang diagnostic pop

@@ -163,13 +163,11 @@ private:
     Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end), center(centerOf(begin, middle, end)) {}
 
     pair<double, double> dxs() const {
-        initializer_list<double> dxs{begin.dx, middle.dx, end.dx};
-        return make_pair(min(dxs), max(dxs));
+        return minmax(initializer_list<double>{begin.dx, middle.dx, end.dx});
     }
 
     pair<double, double> dys() const {
-        initializer_list<double> dys{begin.dy, middle.dy, end.dy};
-        return make_pair(min(dys), max(dys));
+        return minmax(initializer_list<double>{begin.dy, middle.dy, end.dy});
     }
 
 public:

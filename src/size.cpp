@@ -13,8 +13,24 @@ struct Size Size_init(double width, double height) {
     return {width, height};
 }
 
+struct Size Size_copy(Size source) {
+    return Size::copy(source);
+}
+
 struct Size Size_square(double dimension) {
-    return {dimension, dimension};
+    return Size::square(dimension);
+}
+
+struct Size Size_fromWidth(double width) {
+    return Size::fromWidth(width);
+}
+
+struct Size Size_fromHeight(double height) {
+    return Size::fromHeight(height);
+}
+
+struct Size Size_fromRadius(double radius) {
+    return Size::fromRadius(radius);
 }
 
 #pragma clang diagnostic pop

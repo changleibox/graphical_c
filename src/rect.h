@@ -12,6 +12,7 @@ using namespace std;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
 struct Rect {
 public:
@@ -21,6 +22,10 @@ public:
     const double bottom;
 
     Rect(double left, double top, double right, double bottom) : left(left), top(top), right(right), bottom(bottom) {}
+
+    double width{right - left};
+
+    double height{bottom - top};
 
     Size size{Size(right - left, bottom - top)};
 
@@ -35,6 +40,122 @@ public:
 
     static Rect fromCircle(Offset center, double radius) {
         return fromCenter(center, radius * 2, radius * 2);
+    }
+
+    static Rect fromLTWH(double left, double top, double width, double height) {
+        return {left, top, left + width, top + height};
+    }
+
+    static Rect fromPoints(Offset a, Offset b) {
+        return {min(a.dx, b.dx), min(a.dy, b.dy), max(a.dx, b.dx), max(a.dy, b.dy)};
+    }
+
+    Rect shift(Offset offset) const {
+        return {left + offset.dx, top + offset.dy, right + offset.dx, bottom + offset.dy};
+    }
+
+    Rect translate(double translateX, double translateY) const {
+        return {left + translateX, top + translateY, right + translateX, bottom + translateY};
+    }
+
+    Rect inflate(double delta) const {
+        return {left - delta, top - delta, right + delta, bottom + delta};
+    }
+
+    Rect deflate(double delta) const {
+        return inflate(-delta);
+    }
+
+    Rect intersect(Rect other) const {
+        return {
+                max(left, other.left),
+                max(top, other.top),
+                min(right, other.right),
+                min(bottom, other.bottom)
+        };
+    }
+
+    Rect expandToInclude(Rect other) const {
+        return {
+                min(left, other.left),
+                min(top, other.top),
+                max(right, other.right),
+                max(bottom, other.bottom)
+        };
+    }
+
+    bool overlaps(Rect other) const {
+        if (right <= other.left || other.right <= left) {
+            return false;
+        }
+        if (bottom <= other.top || other.bottom <= top) {
+            return false;
+        }
+        return true;
+    }
+
+    /// The lesser of the magnitudes of the [width] and the [height] of this
+    /// rectangle.
+    double shortestSide{min(abs(width), abs(height))};
+
+    /// The greater of the magnitudes of the [width] and the [height] of this
+    /// rectangle.
+    double longestSide{max(abs(width), abs(height))};
+
+    /// The offset to the intersection of the top and left edges of this rectangle.
+    ///
+    /// See also [Size.topLeft].
+    Offset topLeft{Offset(left, top)};
+
+    /// The offset to the center of the top edge of this rectangle.
+    ///
+    /// See also [Size.topCenter].
+    Offset topCenter{Offset(left + width / 2.0, top)};
+
+    /// The offset to the intersection of the top and right edges of this rectangle.
+    ///
+    /// See also [Size.topRight].
+    Offset topRight{Offset(right, top)};
+
+    /// The offset to the center of the left edge of this rectangle.
+    ///
+    /// See also [Size.centerLeft].
+    Offset centerLeft{Offset(left, top + height / 2.0)};
+
+    /// The offset to the point halfway between the left and right and the top and
+    /// bottom edges of this rectangle.
+    ///
+    /// See also [Size.center].
+    Offset center{Offset(left + width / 2.0, top + height / 2.0)};
+
+    /// The offset to the center of the right edge of this rectangle.
+    ///
+    /// See also [Size.centerLeft].
+    Offset centerRight{Offset(right, top + height / 2.0)};
+
+    /// The offset to the intersection of the bottom and left edges of this rectangle.
+    ///
+    /// See also [Size.bottomLeft].
+    Offset bottomLeft{Offset(left, bottom)};
+
+    /// The offset to the center of the bottom edge of this rectangle.
+    ///
+    /// See also [Size.bottomLeft].
+    Offset bottomCenter{Offset(left + width / 2.0, bottom)};
+
+    /// The offset to the intersection of the bottom and right edges of this rectangle.
+    ///
+    /// See also [Size.bottomRight].
+    Offset bottomRight{Offset(right, bottom)};
+
+    /// Whether the point specified by the given offset (which is assumed to be
+    /// relative to the origin) lies between the left and right and the top and
+    /// bottom edges of this rectangle.
+    ///
+    /// Rectangles include their top and left edges but exclude their bottom and
+    /// right edges.
+    bool contains(Offset offset) const {
+        return offset.dx >= left && offset.dx < right && offset.dy >= top && offset.dy < bottom;
     }
 
     string toJson() const {
@@ -67,6 +188,14 @@ public:
 };
 
 DART_API struct Rect Rect_init(double left, double top, double right, double bottom);
+
+DART_API struct Rect Rect_fromLTWH(double left, double top, double width, double height);
+
+DART_API struct Rect Rect_fromCircle(Offset center, double radius);
+
+DART_API struct Rect Rect_formCenter(Offset center, double width, double height);
+
+DART_API struct Rect Rect_fromPoints(Offset a, Offset b);
 
 #pragma clang diagnostic pop
 

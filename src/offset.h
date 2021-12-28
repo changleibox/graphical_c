@@ -27,6 +27,8 @@ public:
     /// consider using [distanceSquared] instead, since it is cheaper to compute.
     const double distance{sqrt(dx * dx + dy * dy)};
 
+    const double distanceSquared{pow(dx, 2) + pow(dy, 2)};
+
     const double direction{atan2(dy, dx)};
 
     /// 绕X轴旋转
@@ -77,6 +79,8 @@ public:
 };
 
 DART_API struct Offset Offset_init(double dx, double dy);
+
+DART_API struct Offset Offset_fromDirection(double direction, double distance);
 
 #pragma clang diagnostic pop
 
