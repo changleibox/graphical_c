@@ -29,4 +29,36 @@ struct Rect Rect_fromPoints(Offset a, Offset b) {
     return Rect::fromPoints(a, b);
 }
 
+struct Rect shift(Rect rect, Offset offset) {
+    return rect.shift(offset);
+}
+
+struct Rect translate(Rect rect, double translateX, double translateY) {
+    return rect.translate(translateX, translateY);
+}
+
+struct Rect inflate(Rect rect, double delta) {
+    return rect.inflate(delta);
+}
+
+struct Rect deflate(Rect rect, double delta) {
+    return rect.deflate(delta);
+}
+
+struct Rect intersect(Rect rect, Rect other) {
+    return rect.intersect(other);
+}
+
+struct Rect expandToInclude(Rect rect, Rect other) {
+    return rect.expandToInclude(other);
+}
+
+bool overlaps(Rect rect, Rect other) {
+    return rect.overlaps(other);
+}
+
+bool contains(Rect rect, Offset offset) {
+    return rect.contains(offset);
+}
+
 #pragma clang diagnostic pop

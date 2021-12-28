@@ -197,6 +197,22 @@ DART_API struct Rect Rect_formCenter(Offset center, double width, double height)
 
 DART_API struct Rect Rect_fromPoints(Offset a, Offset b);
 
+DART_API struct Rect shift(Rect rect, Offset offset);
+
+DART_API struct Rect translate(Rect rect, double translateX, double translateY);
+
+DART_API struct Rect inflate(Rect rect, double delta);
+
+DART_API struct Rect deflate(Rect rect, double delta);
+
+DART_API struct Rect intersect(Rect rect, Rect other);
+
+DART_API struct Rect expandToInclude(Rect rect, Rect other);
+
+DART_API bool overlaps(Rect rect, Rect other);
+
+DART_API bool contains(Rect rect, Offset offset);
+
 #pragma clang diagnostic pop
 
 #endif //GRAPHICAL_RECT_H
