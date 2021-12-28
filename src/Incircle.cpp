@@ -58,7 +58,7 @@ double Incircle_offsetOf(Size size, double radius) {
     return Incircle::offsetOf(size, radius);
 }
 
-Offset Incircle_centerOf(Offset point1, Offset point2, Offset point3) {
+struct Offset Incircle_centerOf(Offset point1, Offset point2, Offset point3) {
     return Incircle::centerOf(point1, point2, point3);
 }
 

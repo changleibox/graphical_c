@@ -10,6 +10,9 @@
 
 using namespace std;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
+
 struct Rect {
 public:
     const double left;
@@ -63,6 +66,8 @@ public:
     }
 };
 
-struct Rect Rect_init(double left, double top, double right, double bottom);
+DART_API struct Rect Rect_init(double left, double top, double right, double bottom);
+
+#pragma clang diagnostic pop
 
 #endif //GRAPHICAL_RECT_H

@@ -7,8 +7,12 @@
 
 #include <cmath>
 #include <string>
+#include "graphical.h"
 
 using namespace std;
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 
 struct Offset {
 public:
@@ -72,6 +76,8 @@ public:
     }
 };
 
-struct Offset Offset_init(double dx, double dy);
+DART_API struct Offset Offset_init(double dx, double dy);
+
+#pragma clang diagnostic pop
 
 #endif //GRAPHICAL_OFFSET_H

@@ -10,6 +10,9 @@
 
 using namespace std;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
+
 struct Path {
 public:
     const struct Incircle top;
@@ -41,5 +44,8 @@ public:
     }
 };
 
+DART_API struct Path Path_init(Incircle top, Incircle left, Incircle right);
+
+#pragma clang diagnostic pop
 
 #endif //GRAPHICAL_PATH_H

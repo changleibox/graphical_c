@@ -7,8 +7,12 @@
 
 #include <cmath>
 #include <string>
+#include "graphical.h"
 
 using namespace std;
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 
 struct Size {
 public:
@@ -56,8 +60,10 @@ public:
     }
 };
 
-struct Size Size_init(double width, double height);
+DART_API struct Size Size_init(double width, double height);
 
-struct Size Size_square(double dimension);
+DART_API struct Size Size_square(double dimension);
+
+#pragma clang diagnostic pop
 
 #endif //GRAPHICAL_SIZE_H

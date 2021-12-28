@@ -211,7 +211,7 @@ DART_API double Incircle_correctRadians(double radians);
 
 DART_API double Incircle_offsetOf(Size size, double radius);
 
-DART_API Offset Incircle_centerOf(Offset point1, Offset point2, Offset point3);
+DART_API struct Offset Incircle_centerOf(Offset point1, Offset point2, Offset point3);
 
 #pragma clang diagnostic pop
 
