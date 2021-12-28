@@ -45,19 +45,6 @@ public:
         return {radius * 2, radius * 2};
     }
 
-    double aspectRatio() const {
-        if (height != 0.0) {
-            return width / height;
-        }
-        if (width > 0.0) {
-            return DBL_MAX;
-        }
-        if (width < 0.0) {
-            return -DBL_MAX;
-        }
-        return 0.0;
-    }
-
     const double direction{atan2(height, width)};
 
     const double radians{atan2(width, height)};
@@ -72,6 +59,19 @@ public:
 
     /// The greater of the magnitudes of the [width] and the [height].
     double longestSide{max(abs(width), abs(height))};
+
+    double aspectRatio() const {
+        if (height != 0.0) {
+            return width / height;
+        }
+        if (width > 0.0) {
+            return DBL_MAX;
+        }
+        if (width < 0.0) {
+            return -DBL_MAX;
+        }
+        return 0.0;
+    }
 
     // Convenience methods that do the equivalent of calling the similarly named
     // methods on a Rect constructed from the given origin and this size.
@@ -210,6 +210,8 @@ DART_API struct Size Size_fromWidth(double width);
 DART_API struct Size Size_fromHeight(double height);
 
 DART_API struct Size Size_fromRadius(double radius);
+
+DART_API double Size_aspectRatio(Size size);
 
 #pragma clang diagnostic pop
 

@@ -33,4 +33,8 @@ struct Size Size_fromRadius(double radius) {
     return Size::fromRadius(radius);
 }
 
+double Size_aspectRatio(Size size) {
+    return size.aspectRatio();
+}
+
 #pragma clang diagnostic pop
