@@ -34,15 +34,15 @@ public:
 
     static Rect fromCenter(Offset center, double width, double height) {
         return {
-                center.dx - width / 2,
-                center.dy - height / 2,
-                center.dx + width / 2,
-                center.dy + height / 2
+                center.dx - width / 2.0,
+                center.dy - height / 2.0,
+                center.dx + width / 2.0,
+                center.dy + height / 2.0
         };
     }
 
     static Rect fromCircle(Offset center, double radius) {
-        return fromCenter(center, radius * 2, radius * 2);
+        return fromCenter(center, radius * 2.0, radius * 2.0);
     }
 
     static Rect fromLTWH(double left, double top, double width, double height) {
