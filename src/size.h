@@ -51,7 +51,7 @@ public:
 
     const double direction{Offset(width, height).direction};
 
-    const double radians{direction};
+    const double radians{Offset(height, width).direction};
 
     const double distance{Offset(width, height).distance};
 

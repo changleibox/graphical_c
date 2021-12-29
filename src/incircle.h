@@ -117,6 +117,8 @@ public:
 
     /// 修正因内切圆造成的位移
     static double offsetOf(Size size, double radius) {
+        assert(size.isFinite() && size >= Size(0, 0));
+        assert(!isinf(radius) && radius >= 0);
         const Size newSize(size.width / 2.0, size.height - radius);
         const double bof = newSize.radians;
         const double boe = acos(radius / newSize.distance);
