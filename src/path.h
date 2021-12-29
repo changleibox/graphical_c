@@ -9,6 +9,7 @@
 
 
 #include <string>
+#include <ostream>
 #include "incircle.h"
 
 using namespace std;
@@ -44,6 +45,11 @@ public:
 
     bool operator!=(const Path &rhs) const {
         return !(rhs == *this);
+    }
+
+    friend ostream &operator<<(ostream &os, const Path &path) {
+        os << "top: " << path.top << " left: " << path.left << " right: " << path.right;
+        return os;
     }
 };
 
