@@ -27,6 +27,10 @@ public:
 
     Rect(double left, double top, double right, double bottom) : left(left), top(top), right(right), bottom(bottom) {}
 
+    static Rect zero() {
+        return {0, 0, 0, 0};
+    }
+
     double width{right - left};
 
     double height{bottom - top};

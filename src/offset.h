@@ -27,6 +27,10 @@ public:
 
     Offset(double dx, double dy) : dx(dx), dy(dy) {}
 
+    static Offset zero() {
+        return {0, 0};
+    }
+
     /// The magnitude of the offset.
     ///
     /// If you need this value to compare it to another [Offset]'s distance,

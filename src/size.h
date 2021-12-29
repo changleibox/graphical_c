@@ -29,6 +29,10 @@ public:
 
     Size(double width, double height) : width(width), height(height) {}
 
+    static Size zero() {
+        return {0, 0};
+    }
+
     static Size copy(Size source) {
         return {source.width, source.height};
     }
