@@ -45,17 +45,17 @@ public:
     }
 
     static Size fromRadius(double radius) {
-        return {radius * 2, radius * 2};
+        return {radius * 2.0, radius * 2.0};
     }
 
-    const double direction{atan2(height, width)};
+    const double direction{Offset(width, height).direction};
 
-    const double radians{flipped().bottomRight({0, 0}).direction};
+    const double radians{direction};
 
-    const double distance{bottomRight({0, 0}).distance};
+    const double distance{Offset(width, height).distance};
 
     /// 半角
-    const double semiRadians{flipped().centerRight({0, 0}).direction};
+    const double semiRadians{Offset(height, width / 2.0).direction};
 
     /// The lesser of the magnitudes of the [width] and the [height].
     double shortestSide{min(abs(width), abs(height))};
