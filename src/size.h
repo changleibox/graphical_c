@@ -11,6 +11,7 @@
 #include <cmath>
 #include <string>
 #include <cfloat>
+#include <ostream>
 #include "graphical.h"
 #include "offset.h"
 
@@ -239,6 +240,11 @@ public:
 
     bool operator!=(const Size &rhs) const {
         return !(rhs == *this);
+    }
+
+    friend ostream &operator<<(ostream &os, const Size &size) {
+        os << "width: " << size.width << " height: " << size.height;
+        return os;
     }
 };
 

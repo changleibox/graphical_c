@@ -8,6 +8,7 @@
 #define GRAPHICAL_RECT_H
 
 
+#include <ostream>
 #include "size.h"
 #include "offset.h"
 
@@ -198,6 +199,11 @@ public:
 
     bool operator!=(const Rect &rhs) const {
         return !(rhs == *this);
+    }
+
+    friend ostream &operator<<(ostream &os, const Rect &rect) {
+        os << "left: " << rect.left << " top: " << rect.top << " right: " << rect.right << " bottom: " << rect.bottom;
+        return os;
     }
 };
 

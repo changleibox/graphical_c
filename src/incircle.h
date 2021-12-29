@@ -9,6 +9,7 @@
 
 
 #include <cmath>
+#include <ostream>
 #include "size.h"
 #include "offset.h"
 #include "rect.h"
@@ -169,17 +170,6 @@ public:
                 .append("}");
     }
 
-
-private:
-    pair<double, double> dxs() const {
-        return minmax(initializer_list<double>{begin.dx, middle.dx, end.dx});
-    }
-
-    pair<double, double> dys() const {
-        return minmax(initializer_list<double>{begin.dy, middle.dy, end.dy});
-    }
-
-public:
     bool operator==(const Incircle &rhs) const {
         return begin == rhs.begin &&
                middle == rhs.middle &&
@@ -188,6 +178,21 @@ public:
 
     bool operator!=(const Incircle &rhs) const {
         return !(rhs == *this);
+    }
+
+    friend ostream &operator<<(ostream &os, const Incircle &incircle) {
+        os << "begin: " << incircle.begin << " middle: " << incircle.middle << " end: " << incircle.end;
+        return os;
+    }
+
+
+private:
+    pair<double, double> dxs() const {
+        return minmax(initializer_list<double>{begin.dx, middle.dx, end.dx});
+    }
+
+    pair<double, double> dys() const {
+        return minmax(initializer_list<double>{begin.dy, middle.dy, end.dy});
     }
 };
 
