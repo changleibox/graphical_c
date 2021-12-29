@@ -51,13 +51,13 @@ public:
             offsetHeight = Incircle::offsetOf(size, radius);
         }
         if (isinf(offsetHeight)) {
+            const double radians = size.semiRadians;
+            return Incircle::fromRadians(radians, radius);
+        } else {
             const Size newSize(width, offsetHeight);
             const Offset offset(0, height - offsetHeight);
             const double radians = newSize.semiRadians;
             return Incircle::fromRadians(radians, radius).shift(offset);
-        } else {
-            const double radians = size.semiRadians;
-            return Incircle::fromRadians(radians, radius);
         }
     }
 
