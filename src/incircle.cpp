@@ -9,39 +9,36 @@ using namespace std;
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
+struct Incircle Incircle_init(Offset begin, Offset middle, Offset end) {
+    return {begin, middle, end};
+}
+
 struct Incircle Incircle_fromRadians(double radians, double radius) {
-    struct Incircle incircle = Incircle::fromRadians(radians, radius);
-    return incircle;
+    return Incircle::fromRadians(radians, radius);
 }
 
 struct Incircle Incircle_fromSize(Size size, double radius, bool avoidOffset) {
-    struct Incircle incircle = Incircle::fromSize(size, radius, avoidOffset);
-    return incircle;
+    return Incircle::fromSize(size, radius, avoidOffset);
 }
 
 struct Incircle Incircle_shift(Incircle incircle, Offset offset) {
-    struct Incircle newIncircle = incircle.shift(offset);
-    return newIncircle;
+    return incircle.shift(offset);
 }
 
 struct Incircle Incircle_rotationX(Incircle incircle, double newRadians) {
-    struct Incircle newIncircle = incircle.rotationX(newRadians);
-    return newIncircle;
+    return incircle.rotationX(newRadians);
 }
 
 struct Incircle Incircle_rotationY(Incircle incircle, double newRadians) {
-    struct Incircle newIncircle = incircle.rotationY(newRadians);
-    return newIncircle;
+    return incircle.rotationY(newRadians);
 }
 
 struct Incircle Incircle_rotationZ(Incircle incircle, double newRadians) {
-    struct Incircle newIncircle = incircle.rotationZ(newRadians);
-    return newIncircle;
+    return incircle.rotationZ(newRadians);
 }
 
 struct Incircle Incircle_flipped(Incircle incircle) {
-    struct Incircle newIncircle = incircle.flipped();
-    return newIncircle;
+    return incircle.flipped();
 }
 
 double Incircle_correctRadians(double radians) {

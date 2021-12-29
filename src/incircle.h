@@ -27,6 +27,8 @@ public:
     const struct Offset end;
     const struct Offset center;
 
+    Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end), center(centerOf(begin, middle, end)) {}
+
     /// 根据一个角度和角内切圆的半径构建一个[Incircle]，[radians]为角对应的弧度，[radius]内切圆半径
     static Incircle fromRadians(double radians, double radius) {
         double eg = radius * cos(radians);
@@ -163,8 +165,6 @@ public:
 
 
 private:
-    Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end), center(centerOf(begin, middle, end)) {}
-
     pair<double, double> dxs() const {
         return minmax(initializer_list<double>{begin.dx, middle.dx, end.dx});
     }
@@ -184,6 +184,8 @@ public:
         return !(rhs == *this);
     }
 };
+
+DART_API struct Incircle Incircle_init(Offset begin, Offset middle, Offset end);
 
 DART_API struct Incircle Incircle_fromRadians(double radians, double radius);
 
