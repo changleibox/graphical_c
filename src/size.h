@@ -50,12 +50,12 @@ public:
 
     const double direction{atan2(height, width)};
 
-    const double radians{atan2(width, height)};
+    const double radians{flipped().bottomRight({0, 0}).direction};
 
-    const double distance{direction};
+    const double distance{bottomRight({0, 0}).distance};
 
     /// 半角
-    const double semiRadians{atan2(height, width / 2)};
+    const double semiRadians{flipped().centerRight({0, 0}).direction};
 
     /// The lesser of the magnitudes of the [width] and the [height].
     double shortestSide{min(abs(width), abs(height))};
