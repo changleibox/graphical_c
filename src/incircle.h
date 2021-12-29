@@ -26,7 +26,6 @@ public:
     const Offset begin;
     const Offset middle;
     const Offset end;
-    const Offset center{centerOf(begin, end, middle)};
 
     Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end) {}
 
@@ -62,11 +61,10 @@ public:
         }
     }
 
+    const Offset center{centerOf(begin, end, middle)};
+
     /// 内切圆半径
     const double radius{abs((center - middle).distance)};
-
-    /// 内切圆
-    const Rect circle{Rect::fromCircle(center, radius)};
 
     /// 角的弧度
     const double radians{correctRadians(acos((begin - end).distance / (2 * radius)))};
@@ -76,6 +74,9 @@ public:
 
     /// 角的顶点
     const Offset vertex{Offset(middle.dx + (radius / sin(radians) - radius) * sin(rotation), middle.dy - (radius / sin(radians) - radius) * cos(rotation))};
+
+    /// 内切圆
+    const Rect circle{Rect::fromCircle(center, radius)};
 
     /// 边界
     const Rect bounds{Rect(dxs().first, dys().first, dxs().second, dys().second)};
