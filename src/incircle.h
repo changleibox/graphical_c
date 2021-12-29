@@ -23,12 +23,12 @@ using namespace std;
 
 struct Incircle {
 public:
-    const struct Offset begin;
-    const struct Offset middle;
-    const struct Offset end;
-    const struct Offset center;
+    const Offset begin;
+    const Offset middle;
+    const Offset end;
+    const Offset center{centerOf(begin, end, middle)};
 
-    Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end), center(centerOf(begin, end, middle)) {}
+    Incircle(Offset begin, Offset middle, Offset end) : begin(begin), middle(middle), end(end) {}
 
     /// 根据一个角度和角内切圆的半径构建一个[Incircle]，[radians]为角对应的弧度，[radius]内切圆半径
     static Incircle fromRadians(double radians, double radius) {
